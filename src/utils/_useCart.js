@@ -18,7 +18,6 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  console.log('call reducer', action);
   let products;
   let totalPrice = state.totalPrice;
   let totalQuantity = state.totalQuantity;
@@ -26,23 +25,42 @@ function reducer(state, action) {
     case actions.INCREASE:
       // find product with same id in state.products
       // increase quantity by 1
-      products = state.products.map(el => el);
-      // increase total by price
-      totalPrice = state.totalPrice + 1;
-      // increase total quantity
-      totalQuantity = state.totalQuantity + 1;
+      products = state.products.map(product => {
+        if(product.id === Number(action.payload.id)) {
+          // increase total price by product price
+          totalPrice = (parseFloat(totalPrice) + parseFloat(product.price)).toFixed(2);
+          // increase total quantity
+          totalQuantity = totalQuantity + 1;
+          
+          // update product
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+            total: (parseFloat(product.total) + parseFloat(product.price)).toFixed(2),
+          }
+        }
+        return product;
+      });
       // return updated state
       return {products, totalPrice, totalQuantity};
     case actions.DECREASE:
-      // find product with same id in state.products
+      // find product with same id in state.products, decreate quantitye
       // if current product qnt <= 1, remove product
-      // else decrease quantity
-      products = state.products.map(el => el);
-      // decrease total by price
-      totalPrice = state.totalPrice - 1;
-      // increase total quantity
-      totalQuantity = state.totalQuantity - 1;
-      return {products, totalPrice, totalQuantity};
+      products = state.products.map(product => {
+        if(product.id === Number(action.payload.id)) {
+          totalPrice = (parseFloat(totalPrice) - parseFloat(product.price)).toFixed(2);
+          totalQuantity = totalQuantity - 1;
+
+          return {
+            ...product,
+            quantity: product.quantity - 1,
+            total: (parseFloat(totalPrice) - parseFloat(product.price)).toFixed(2),
+          }
+        }
+        return product;
+      }).filter(product => product.quantity > 0);
+
+      return { products, totalPrice, totalQuantity };
     case actions.REMOVE: 
       // find product with same id in state.products
       products = state.products.filter(product => {
@@ -52,17 +70,17 @@ function reducer(state, action) {
         if(product.id === Number(action.payload.id)) {
           totalPrice = (parseFloat(totalPrice) - parseFloat(product.total)).toFixed(2);
           totalQuantity = totalQuantity - product.quantity;
-        } else {
-          return product;
-        }
+          return false;
+        } 
+        return product;
       });
-      return {products, totalPrice, totalQuantity};
+      return { products, totalPrice, totalQuantity };
     case actions.ADD: 
       // find product with same id in state.products
       let isExist = false;
       // increase product quantity by 1
       products = state.products.map(product => {
-        if(product.id === action.payload.id) {
+        if(product.id === Number(action.payload.id)) {
           isExist = true;
 
           return {
@@ -85,7 +103,7 @@ function reducer(state, action) {
       // increase total price and qnt
       totalPrice = (parseFloat(totalPrice) + parseFloat(action.payload.price)).toFixed(2);
       totalQuantity = totalQuantity + 1;
-      return {products, totalPrice, totalQuantity};
+      return { products, totalPrice, totalQuantity };
     default: return state;
   }
 };

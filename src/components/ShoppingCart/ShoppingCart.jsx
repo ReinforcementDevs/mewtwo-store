@@ -39,12 +39,21 @@ const tempStyle = {
   padding: '30px',
 };
 
+const buttonName = {
+  increase: actions.INCREASE,
+  decrease: actions.DECREASE,
+  remove: actions.REMOVE,
+}
+
 function ShoppingCart() {
-  const {state: {totalPrice, products}, dispatch} = useCartContext();
+  const { state: { totalPrice, products }, dispatch } = useCartContext();
 
   function handleClick(event) {
-    const id = event.target.id;
-    dispatch({type: actions.REMOVE, payload: {id}});
+    const id = event.target.dataset.id;
+    const name = event.target.name;
+    const type = buttonName[name];
+
+    dispatch({type, payload: {id}});
   };
   return (
     <div style={tempStyle}>
@@ -63,12 +72,16 @@ function ShoppingCart() {
                 <div className='cartItem-info'>
                   <span className='cartItem-title'>{title}</span>
                   <span className='cartItem-price'>${price}</span>
-                  <input value={quantity}></input>
+                  <div className='cartItem-quantity--wrapper'>
+                    <button aria-label='decrease product quantity' data-id={id} name='decrease' onClick={handleClick}>-</button>
+                    <span className='cartItem-quantity'>{quantity}</span>
+                    <button aria-label='increase product quantity' data-id={id} name='increase' onClick={handleClick}>+</button>
+                  </div>
                   <span className='cartItem-total'>${total}</span>
                 </div>
                 {/* <div className='cartItem-total'>{total}</div> */}
                 <div className='cartItem-remove'>
-                  <button aria-label='remove item from cart' id={id} onClick={handleClick}>X</button>
+                  <button aria-label='remove item from cart' name='remove' data-id={id} onClick={handleClick}>X</button>
                 </div>
               </div>
             )}) : <div>You don't have any products in your cart. Browse <Link to='/'>here</Link></div>}
