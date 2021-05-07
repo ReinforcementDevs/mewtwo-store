@@ -2,7 +2,7 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import logo from '../../assets/Mewtwo.png';
 
-export default function CheckoutButton() {
+export default function CheckoutButton({ totalPrice }) {
 	const pushlishableKey =
 		'pk_test_51Imi4SIAnLFPMvKfMUV8zcYvy6D6iOMpX6IN62VrIsQob9bqyZ0sK9sT1kzbXhiUA6JYfg5DE9s92CAaPuXBmVKq00cWn7LFMx';
 
@@ -20,8 +20,8 @@ export default function CheckoutButton() {
 			zipCode
 			panelLabel='Pay Now'
 			image={logo}
-			description='Your total is $20'
-			amount={2000000}
+			description={`Your total is $${totalPrice}`}
+			amount={totalPrice * 100}
 		/>
 	);
 }

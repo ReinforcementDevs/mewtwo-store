@@ -94,7 +94,7 @@ function ShoppingCart() {
 				</div>
 				<div className='cartTotal'>
 					<span>Total: {totalPrice}</span>
-					<CheckoutButton />
+					<CheckoutButton totalPrice={totalPrice} />
 				</div>
 			</div>
 		</div>
