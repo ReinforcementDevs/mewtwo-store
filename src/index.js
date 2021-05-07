@@ -6,13 +6,11 @@ import { ProvideAuth } from './routes/useAuth';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ProvideAuth>
-        <App />
-      </ProvideAuth>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <ProvideAuth>
+      <App />
+    </ProvideAuth>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

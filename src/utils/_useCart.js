@@ -1,20 +1,20 @@
-import React, {useReducer, useEffect} from 'react';
+import React, { useReducer, useEffect } from 'react';
 
 // keep track of all items a cart
 // save items to browser cookie
 // check browser cookie after first render
 
 const actions = {
-  INCREASE: 'INCREASE',
-  DECREASE: 'DECREASE',
-  REMOVE: 'REMOVE',
-  ADD: 'ADD',
+	INCREASE: 'INCREASE',
+	DECREASE: 'DECREASE',
+	REMOVE: 'REMOVE',
+	ADD: 'ADD',
 };
 
 const initialState = {
-  products: [],
-  totalPrice: 0,
-  totalQuantity: 0,
+	products: [],
+	totalPrice: 0,
+	totalQuantity: 0,
 };
 
 function reducer(state, action) {
@@ -110,29 +110,33 @@ function reducer(state, action) {
 
 const CartContext = React.createContext();
 
-function CartProvider ({children}) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+function CartProvider({ children }) {
+	const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    // check cookie
-    console.log('cart provider first useeffect');
-  }, []);
+	useEffect(() => {
+		// check cookie
+		console.log('cart provider first useeffect');
+	}, []);
 
-  useEffect(() => {
-    // update cookie
-    console.log('cart provider useeffect, update cookie', state);
-  }, [state]);
+	useEffect(() => {
+		// update cookie
+		console.log('cart provider useeffect, update cookie', state);
+	}, [state]);
 
-  return <CartContext.Provider value={{state, dispatch}}>{children}</CartContext.Provider>
-};
+	return (
+		<CartContext.Provider value={{ state, dispatch }}>
+			{children}
+		</CartContext.Provider>
+	);
+}
 
 function useCartContext() {
-  const context = React.useContext(CartContext);
+	const context = React.useContext(CartContext);
 
-  if (context === undefined) {
-    throw new Error('useCartContext must be used within a CartProvider');
-  }
-  return context;
-};
+	if (context === undefined) {
+		throw new Error('useCartContext must be used within a CartProvider');
+	}
+	return context;
+}
 
-export {CartProvider, useCartContext, actions};
+export { CartProvider, useCartContext, actions };

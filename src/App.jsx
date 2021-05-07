@@ -28,13 +28,13 @@ const App = () => {
             <ProductList />
           </PrivateRoute>
 
-          <Route exact path='/products/:id'>
+          <PrivateRoute exact path='/products/:id'>
             <ProductDetail />
-          </Route>
+          </PrivateRoute>
 
-          <Route exact path='/checkout'>
+          <PrivateRoute exact path='/checkout'>
             <ShoppingCart />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </CartProvider>
     </div>
