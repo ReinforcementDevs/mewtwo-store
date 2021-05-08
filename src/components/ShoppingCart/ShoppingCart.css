@@ -1,56 +1,64 @@
 .cartContainer {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .cartItems-wrapper {
-	width: 80%;
+  width: 80%;
 }
 
 .checkoutContainer {
-	width: 80%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .cartTotal {
-	width: 30%;
-	padding: 15px;
-	text-align: end;
+  width: 30%;
+  padding: 15px;
+  text-align: end;
 }
 
 .cartItem {
-	display: flex;
-	padding: 15px;
+  display: flex;
+  padding: 15px;
 }
 
 .cartItem-info {
-	display: flex;
-	flex-direction: column;
-	padding-left: 25px;
-	flex: 1 0 auto;
-	align-items: flex-start;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+  flex: 1 0 auto;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .cartItem-quantity--wrapper {
-	width: 60px;
-	display: flex;
-	justify-content: space-between;
+  width: 60px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .cartItemImage {
-	width: 1005;
-	max-width: 100px;
-	height: auto;
+  width: 1005;
+  max-width: 100px;
+  height: auto;
 }
 
 .cartItem-title,
 .cartItem-price {
-	display: block;
+  display: block;
+  margin-left: 12px;
 }
 
 .cartItem-total {
-	display: block;
+  display: block;
+  margin-left: 12px;
+}
+
+.cartItem-quantity--wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
