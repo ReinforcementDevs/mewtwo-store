@@ -58,8 +58,8 @@ function ShoppingCart() {
   } = useCartContext();
 
   function handleClick(event) {
-    const id = event.target.dataset.id;
-    const name = event.target.name;
+    const id = event.currentTarget.dataset.id;
+    const name = event.currentTarget.name;
     const type = buttonName[name];
 
     dispatch({ type, payload: { id } });
