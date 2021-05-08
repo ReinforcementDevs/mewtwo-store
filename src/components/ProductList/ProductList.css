@@ -1,23 +1,23 @@
 .product {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .imgProd {
-	width: 200px;
+  width: 200px;
 }
 
 .prodSingle {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
 }
 
 .search {
-	margin-top: 10px;
-	display: flex;
-	justify-content: flex-end;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
