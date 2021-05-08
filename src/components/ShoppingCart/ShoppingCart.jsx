@@ -121,7 +121,7 @@ function ShoppingCart() {
 				</div>
 				<div className='cartTotal'>
 					<span>Total: {totalPrice}</span>
-					<button>Checkout</button>
+					<CheckoutButton totalPrice={totalPrice} />
 				</div>
 			</div>
 		</div>
