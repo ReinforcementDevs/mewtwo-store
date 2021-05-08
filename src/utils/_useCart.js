@@ -54,7 +54,7 @@ function reducer(state, action) {
           return {
             ...product,
             quantity: product.quantity - 1,
-            total: (parseFloat(totalPrice) - parseFloat(product.price)).toFixed(2),
+            total: (parseFloat(product.total) - parseFloat(product.price)).toFixed(2),
           }
         }
         return product;
