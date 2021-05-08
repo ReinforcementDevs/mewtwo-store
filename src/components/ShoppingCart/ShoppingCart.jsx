@@ -68,60 +68,73 @@ function ShoppingCart() {
 					{products.length > 0 ? (
 						products.map(({ id, title, image, price, quantity, total }) => {
 							return (
-								<div key={id} className='cartItem'>
-									<div className='cartItem-img'>
-										<Link to={`/products/${id}`}>
-											<img className='cartItemImage' src={image} alt={title} />
-										</Link>
-									</div>
-									<div className='cartItem-info'>
-										<span className='cartItem-title'>{title}</span>
-										<span className='cartItem-price'>${price}</span>
-										<div className='cartItem-quantity--wrapper'>
+								<>
+									<div key={`cart-${id}`} className='cartItem'>
+										<div className='cartItem-img'>
+											<Link to={`/products/${id}`}>
+												<img
+													className='cartItemImage'
+													src={image}
+													alt={title}
+												/>
+											</Link>
+										</div>
+										<div className='cartItem-info'>
+											<span className='cartItem-title'>{title}</span>
+											<span className='cartItem-price'>${price}</span>
+											<div className='cartItem-quantity--wrapper'>
+												<button
+													aria-label='decrease product quantity'
+													data-id={id}
+													name='decrease'
+													onClick={handleClick}
+												>
+													-
+												</button>
+												<span className='cartItem-quantity'>{quantity}</span>
+												<button
+													aria-label='increase product quantity'
+													data-id={id}
+													name='increase'
+													onClick={handleClick}
+												>
+													+
+												</button>
+											</div>
+											<span className='cartItem-total'>${total}</span>
+										</div>
+
+										<div className='cartItem-remove'>
 											<button
-												aria-label='decrease product quantity'
+												aria-label='remove item from cart'
+												name='remove'
 												data-id={id}
-												name='decrease'
 												onClick={handleClick}
 											>
-												-
-											</button>
-											<span className='cartItem-quantity'>{quantity}</span>
-											<button
-												aria-label='increase product quantity'
-												data-id={id}
-												name='increase'
-												onClick={handleClick}
-											>
-												+
+												X
 											</button>
 										</div>
-										<span className='cartItem-total'>${total}</span>
 									</div>
-									{/* <div className='cartItem-total'>{total}</div> */}
-									<div className='cartItem-remove'>
-										<button
-											aria-label='remove item from cart'
-											name='remove'
-											data-id={id}
-											onClick={handleClick}
-										>
-											X
-										</button>
-									</div>
-								</div>
+									<hr />
+								</>
 							);
 						})
 					) : (
 						<div>
-							You don't have any products in your cart. Browse{' '}
-							<Link to='/'>here</Link>
+							You don't have any products in your cart.{' '}
+							<Link to='/' style={{ color: 'blue' }}>
+								Continue Shopping
+							</Link>
 						</div>
 					)}
 				</div>
-				<div className='cartTotal'>
-					<span>Total: {totalPrice}</span>
-					<CheckoutButton totalPrice={totalPrice} />
+				<div className='checkoutContainer'>
+					<div className='cartTotal'>
+						<span>Total: ${totalPrice}</span>
+					</div>
+					<div className='checkoutbtn'>
+						<CheckoutButton totalPrice={totalPrice} />
+					</div>
 				</div>
 			</div>
 		</div>
