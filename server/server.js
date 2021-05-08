@@ -31,7 +31,7 @@ app.use('/user', userRouter);
  * catch-all route handler for any requests to an unknown route
  */
 app.use('*', (req, res) => {
-  return res.sendStatus(404);
+	return res.sendStatus(404);
 });
 
 /**
@@ -39,22 +39,22 @@ app.use('*', (req, res) => {
  * @see https://expressjs.com/en/guide/error-handling.html#writing-error-handlers
  */
 app.use((err, req, res, next) => {
-  const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
-    status: 400,
-    message: { err: 'An error occurred' },
-  };
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log('errorObj.message --->', errorObj.message);
-  console.log('errorObj.status --->', errorObj.status);
-  return res.status(errorObj.status).json(errorObj.message);
+	const defaultErr = {
+		log: 'Express error handler caught unknown middleware error',
+		status: 400,
+		message: { err: 'An error occurred' },
+	};
+	const errorObj = Object.assign({}, defaultErr, err);
+	console.log('errorObj.message --->', errorObj.message);
+	console.log('errorObj.status --->', errorObj.status);
+	return res.status(errorObj.status).json(errorObj.message);
 });
 
 /**
  * start server
  */
 app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
+	console.log(`Server listening on port: ${PORT}`);
 });
 
 module.exports = app;

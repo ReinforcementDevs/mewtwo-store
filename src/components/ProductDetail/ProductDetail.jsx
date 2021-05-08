@@ -2,9 +2,8 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import useProduct from './_useProduct';
-import CheckoutButton from '../Stripe-Checkout/StripeCheckout';
 
-import {actions, useCartContext} from '../../utils/_useCart';
+import { actions, useCartContext } from '../../utils/_useCart';
 
 import './ProductDetail.css';
 
@@ -15,70 +14,70 @@ import './ProductDetail.css';
 // actions: addItem
 
 const tempStyle = {
-  margin: '0 auto',
-  maxWidth: '1200px',
-  padding: '30px',
+	margin: '0 auto',
+	maxWidth: '1200px',
+	padding: '30px',
 };
 
 function ProductDetail() {
-  //get id from router
-  const { id } = useParams();
+	//get id from router
+	const { id } = useParams();
 
-  const {dispatch} = useCartContext();
+	const { dispatch } = useCartContext();
 
-  const [loading, product] = useProduct(id);
+	const [loading, product] = useProduct(id);
 
-  function handleClick() {
-    console.log('ADD TO CART', id);
-    const productPayload = {
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      image: product.image,
-    }
-    dispatch({type: actions.ADD, payload: {...productPayload}});
-  }
+	function handleClick() {
+		console.log('ADD TO CART', id);
+		const productPayload = {
+			id: product.id,
+			title: product.title,
+			price: product.price,
+			image: product.image,
+		};
+		dispatch({ type: actions.ADD, payload: { ...productPayload } });
+	}
 
-  const title = loading ? (
-    <div className='mockTitle'></div>
-  ) : (
-    <h1 className='productTitle'>{product.title}</h1>
-  );
-  const description = loading ? (
-    <p className='mockDescription'></p>
-  ) : (
-    <p className='productDescription'>{product.description}</p>
-  );
-  const productPrice = loading ? '$' : `$${product.price}`;
+	const title = loading ? (
+		<div className='mockTitle'></div>
+	) : (
+		<h1 className='productTitle'>{product.title}</h1>
+	);
+	const description = loading ? (
+		<p className='mockDescription'></p>
+	) : (
+		<p className='productDescription'>{product.description}</p>
+	);
+	const productPrice = loading ? '$' : `$${product.price}`;
 
-  return (
-    <div style={tempStyle}>
-      <div className='breadCrumbWrapper'>
-        <Link to='/'>&larr; Back to all products</Link>
-      </div>
-      <div className='productContainer'>
-        <div className='productImage'>
-          <div className='productImageWrapper'>
-            <img
-              src={loading ? '' : product.image}
-              alt={product ? product.title : ''}
-            ></img>
-          </div>
-        </div>
-        <div className='productInfo'>
-          {title}
-          <div className='priceWrapper'>
-            <span>{productPrice}</span>
-          </div>
-          <button className='productButton' onClick={handleClick}>
-            Add to Cart
-          </button>
-          <CheckoutButton />
-          {description}
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div style={tempStyle}>
+			<div className='breadCrumbWrapper'>
+				<Link to='/'>&larr; Back to all products</Link>
+			</div>
+			<div className='productContainer'>
+				<div className='productImage'>
+					<div className='productImageWrapper'>
+						<img
+							src={loading ? '' : product.image}
+							alt={product ? product.title : ''}
+						></img>
+					</div>
+				</div>
+				<div className='productInfo'>
+					{title}
+					<div className='priceWrapper'>
+						<span>{productPrice}</span>
+					</div>
+					<button className='productButton' onClick={handleClick}>
+						Add to Cart
+					</button>
+
+					{description}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default ProductDetail;
