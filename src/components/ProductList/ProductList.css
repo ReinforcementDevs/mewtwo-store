@@ -16,35 +16,8 @@
 	width: 400px;
 }
 
-.searchTextBox {
-	margin-bottom: 10px;
+.search {
 	margin-top: 10px;
-	border: 1px solid black;
-	line-height: 30px;
-	/* height: 34px; */
-  font-size: 15px;
-  /* border-radius: 50px; */
-  width: 300px;
-  text-align: left;
-}
-.searchButton {
-	line-height: 35px;
-	color: white;
-	background-color: #3665f3;
-	border: none;
-	width: 80px;
-	margin-left: 10px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-}
-input.searchTextBox:focus {
-  outline-width: 0;
-}
-
-.dropdown {
-  height: 35px;
-}
-
-select.dropdown:focus {
-  outline-width: 0;
+	display: flex;
+	justify-content: flex-end;
 }
